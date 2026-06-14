@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 def top1 (tokens, top_n=10):
     conteos = defaultdict(int)
     for i in range(len(tokens)-1):
@@ -28,3 +28,8 @@ def top2 (tokens, top_n=10):
         key=lambda x: x[1],
         reverse = True
     )[:top_n]
+
+def palabraTop(tokens):
+    conteo = Counter(tokens)
+    palabra, frecuencia = conteo.most_common(1)[0]
+    return palabra, frecuencia

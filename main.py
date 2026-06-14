@@ -2,8 +2,12 @@ from Preprocesamiento import limpiartexto
 from Modelos import Markov1, Markov2
 from Prediccion import predecir, predecir2
 from generacion import generarO1, generarO2
-from analisis import top1, top2
-
+from analisis import top1, top2, palabraTop
+from Entropia import(
+    entropia,
+    analizarTemperaturas
+)
+from Grafica import graficar
 # =====================================================
 # CARGA DE TEXTOS
 # =====================================================
@@ -300,3 +304,52 @@ print(f"Estados Orden 1 Texto 2: {len(Modelo21)}")
 
 print(f"Estados Orden 2 Texto 1: {len(Modelo12)}")
 print(f"Estados Orden 2 Texto 2: {len(Modelo22)}")
+
+print("\n" + "="*60)
+print("ANÁLISIS DE TEMPERATURA")
+print("="*60)
+
+palabra1, frecuencia1 = palabraTop(Tokens1)
+
+print("\nTexto 1")
+print(
+    f"Palabra más frecuente: "
+    f"'{palabra1}'"
+    f"({frecuencia1} apariciones)"
+)
+if palabra1 in Modelo11:
+    resultados1 = analizarTemperaturas(
+        Modelo11[palabra1]
+    )
+    for T, H in resultados1.items():
+        print(
+            f"T = {T} -> Entropía = {H:.4f}"
+        )
+palabra2, frecuencia2 = palabraTop(Tokens2)
+
+print("\nTexto 2")
+print(
+    f"Palabra más frecuente: "
+    f"'{palabra2}'"
+    f"({frecuencia2} apariciones)"
+)
+if palabra2 in Modelo21:
+    resultados2 = analizarTemperaturas(
+        Modelo21[palabra2]
+    )
+    for T, H in resultados2.items():
+        print(
+            f"T = {T} -> Entropía = {H:.4f}"
+        )
+resultados1 = analizarTemperaturas(
+    Modelo11[palabra1]
+)
+resultados2 = analizarTemperaturas(
+    Modelo21[palabra2]
+)
+graficar(
+    resultados1,
+    resultados2,
+    "Libro 1",
+    "Libro 2"
+)
