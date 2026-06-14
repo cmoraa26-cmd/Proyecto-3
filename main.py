@@ -11,7 +11,7 @@ from analisis import top1, top2
 with open("Texto1.txt", "r", encoding="utf-8") as f:
     texto1 = f.read()
 
-with open("Texto2.txt", "r", encoding="utf-8") as f:
+with open("Texto3.txt", "r", encoding="utf-8") as f:
     texto2 = f.read()
 
 # =====================================================
